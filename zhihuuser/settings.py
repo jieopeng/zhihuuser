@@ -14,9 +14,12 @@ BOT_NAME = 'zhihuuser'
 SPIDER_MODULES = ['zhihuuser.spiders']
 NEWSPIDER_MODULE = 'zhihuuser.spiders'
 
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+REDIS_URL = 'redis://localhost:6379'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'zhihuuser (+http://www.yourdomain.com)'
-
+SCHEDULER_PERSIST = True
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
@@ -65,6 +68,7 @@ DEFAULT_REQUEST_HEADERS = {
 ITEM_PIPELINES = {
    'zhihuuser.pipelines.ZhihuuserPipeline': 300,
    'zhihuuser.pipelines.MongoPipeline': 301,
+'scrapy_redis.pipelines.RedisPipeline': 302
 
 }
 
